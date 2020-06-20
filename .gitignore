@@ -1,0 +1,4 @@
+settings.py
+.vscode
+igenv/
+__pycache__/
