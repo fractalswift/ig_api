@@ -49,4 +49,24 @@ indices_ids = [row["id"] for row in get_id(93262)["nodes"]]
 
 all_indices_ids = [get_id(row) for row in indices_ids]
 
-pprint.pprint(all_indices_ids)
+
+# Now use the id to get a list of index epics (flatten the list)
+
+penultimate_row_of_tree_ids = [row["nodes"] for row in all_indices_ids]
+
+flattened = [val for sublist in penultimate_row_of_tree_ids for val in sublist]
+
+
+# Now create a list of epics from these ids
+
+info = [get_id(row["id"]) for row in flattened]
+
+# pprint.pprint(info)
+
+almost_there = [row["markets"] for row in info]
+
+flattened_finally = [val for sublist in almost_there for val in sublist]
+
+epics = [row["epic"] for row in flattened_finally]
+
+pprint.pprint(epics)
