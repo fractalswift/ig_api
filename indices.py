@@ -56,17 +56,20 @@ penultimate_row_of_tree_ids = [row["nodes"] for row in all_indices_ids]
 
 flattened = [val for sublist in penultimate_row_of_tree_ids for val in sublist]
 
-
-# Now create a list of epics from these ids
-
 info = [get_id(row["id"]) for row in flattened]
-
-# pprint.pprint(info)
 
 almost_there = [row["markets"] for row in info]
 
 flattened_finally = [val for sublist in almost_there for val in sublist]
 
+# Woo! Finally we can get the epics
+
 epics = [row["epic"] for row in flattened_finally]
 
-pprint.pprint(epics)
+
+# Store them in a csv so we don't have to keep making this call
+
+with open("current_epics.txt", "a") as f:
+    for epic in epics:
+        f.write(f"{epic}\n")
+    f.close()
