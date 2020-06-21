@@ -64,12 +64,12 @@ flattened_finally = [val for sublist in almost_there for val in sublist]
 
 # Woo! Finally we can get the epics
 
-epics = [row["epic"] for row in flattened_finally]
+epics_and_names = [[row["epic"], row["instrumentName"]] for row in flattened_finally]
 
 
 # Store them in a csv so we don't have to keep making this call
 
 with open("current_epics.txt", "a") as f:
-    for epic in epics:
-        f.write(f"{epic}\n")
+    for row in epics_and_names:
+        f.write(f"{row[0]}, {row[1]}\n")
     f.close()
